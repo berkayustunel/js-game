@@ -38,6 +38,8 @@ if(Math.random() >= 0.5)
     dby2 = -dby2;
 }
 
+var score = 0;
+
 addEventListener("keydown", move);
 
 function move(e)
@@ -112,6 +114,8 @@ function draw()
         ctx.drawImage(character, x, y);
         ctx.drawImage(bmb, bx, by);
         ctx.drawImage(bmb2, bx2, by2);
+        ctx.font = "15px Arial";
+        ctx.fillText("Score: " + score, 400, 50);
     }
     else
     {
@@ -120,9 +124,35 @@ function draw()
         x = 220; y = 350;
         bx = 100; by = 100;
         bx2 = 400; by2 = 100;
-        alert("Game Over!");
+        dbx = Math.random() * 3 + 2;
+        if(Math.random() >= 0.5)
+        {
+            dbx = -dbx;
+        }
+        dby = Math.random() * 3 + 2;
+        if(Math.random() >= 0.5)
+        {
+            dby = -dby;
+        }
+        dbx2 = Math.random() * 3 + 2;
+        if(Math.random() >= 0.5)
+        {
+            dbx2 = -dbx2;
+        }
+        dby2 = Math.random() * 3 + 2;
+        if(Math.random() >= 0.5)
+        {
+            dby2 = -dby2;
+        }
+        alert("Game Over!\nScore: " + score);
+        score = 0;
     }
     requestAnimationFrame(draw);
+}
+
+function addScore()
+{
+    score += 1;
 }
 
 function gameOver()
