@@ -16,7 +16,7 @@ var i = 1;
 
 bmb[1] = new Image();
 bmb[1].src = "images/bomb.png";
-bx[1] = 220; by[1] = 220;
+bx[1] = Math.random()*canvas.width; by[1] = Math.random()*canvas.height;
 dbx[1] = Math.random()*2; if(Math.random() >= 0.5){dbx[1] *= -1}
 dby[1] = Math.random()*2; if(Math.random() >= 0.5){dby[1] *= -1}
 
@@ -28,19 +28,19 @@ function move(e)
 {
     if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 119)
     {
-        dy = -1;
+        dy = -1.5;
     }
     else if(e.keyCode == 37 || e.keyCode == 65 || e.keyCode == 97)
     {
-        dx = -1;
+        dx = -1.5;
     }
     else if(e.keyCode == 40 || e.keyCode == 83 || e.keyCode == 115)
     {
-        dy = 1;
+        dy = 1.5;
     }
     else if(e.keyCode == 39 || e.keyCode == 68 || e.keyCode == 100)
     {
-        dx = 1;
+        dx = 1.5;
     }
 }
 
@@ -71,7 +71,7 @@ function createBomb()
     i += 1;
     bmb[i] = new Image();
     bmb[i].src = "images/bomb.png";
-    bx[i] = 220; by[i] = 220;
+    bx[i] = Math.random()*canvas.width; by[i] = Math.random()*canvas.height;
     dbx[i] = Math.random()*2; if(Math.random() >= 0.5){dbx[i] *= -1}
     dby[i] = Math.random()*2; if(Math.random() >= 0.5){dby[i] *= -1}
 }
@@ -116,7 +116,7 @@ function draw()
                 i = 1;
                 bmb[1] = new Image();
                 bmb[1].src = "images/bomb.png";
-                bx[1] = 220; by[1] = 220;
+                bx[1] = Math.random()*canvas.width; by[1] = Math.random()*canvas.height;
                 dbx[1] = Math.random()*2; if(Math.random() >= 0.5){dbx[1] *= -1}
                 dby[1] = Math.random()*2; if(Math.random() >= 0.5){dby[1] *= -1}
                 break;
