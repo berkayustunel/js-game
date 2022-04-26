@@ -7,37 +7,18 @@ character.src = "images/char.png";
 var bg = new Image();
 bg.src = "images/bg.png";
 
-var bmb = new Image();
-bmb.src = "images/bomb.png";
-
-var bmb2 = new Image();
-bmb2.src = "images/bomb.png";
-
-var x = 220; var y = 350;
+var x = 220; var y = 400;
 var dx = 0; var dy = 0;
-var bx = 100; var by = 100;
-var bx2 = 400; var by2 = 100;
+var bmb = [];
+var bx = []; var by = [];
+var dbx = []; var dby = [];
+var i = 1;
 
-var dbx = Math.random() * 2 + 1;
-if(Math.random() >= 0.5)
-{
-    dbx = -dbx;
-}
-var dby = Math.random() * 2 + 1;
-if(Math.random() >= 0.5)
-{
-    dby = -dby;
-}
-var dbx2 = Math.random() * 2 + 1;
-if(Math.random() >= 0.5)
-{
-    dbx2 = -dbx2;
-}
-var dby2 = Math.random() * 2 + 1;
-if(Math.random() >= 0.5)
-{
-    dby2 = -dby2;
-}
+bmb[1] = new Image();
+bmb[1].src = "images/bomb.png";
+bx[1] = 220; by[1] = 220;
+dbx[1] = Math.random()*2; if(Math.random() >= 0.5){dbx[1] *= -1}
+dby[1] = Math.random()*2; if(Math.random() >= 0.5){dby[1] *= -1}
 
 var score = 0;
 
@@ -85,6 +66,16 @@ function stop(e)
     }   
 }
 
+function createBomb()
+{
+    i += 1;
+    bmb[i] = new Image();
+    bmb[i].src = "images/bomb.png";
+    bx[i] = 220; by[i] = 220;
+    dbx[i] = Math.random()*2; if(Math.random() >= 0.5){dbx[i] *= -1}
+    dby[i] = Math.random()*2; if(Math.random() >= 0.5){dby[i] *= -1}
+}
+
 explode = false;
 
 function draw()
@@ -92,39 +83,44 @@ function draw()
     if(explode == false)
     {
         ctx.drawImage(bg, 0, 0);
-        x += dx; if(x <= 0){x = 0}; if(x >= 470){x = 470};
-        y += dy; if(y <= 0){y = 0}; if(y >= 465){y = 465};
-        bx += dbx; by += dby;
-        if(bx < 0 || bx+bmb.width > canvas.width)
-        {
-            dbx = -dbx;
-            bx += dbx;
-        }
-        if(by < 0 || by+bmb.height > canvas.height)
-        {
-            dby = -dby;
-            by += dby;
-        }
-        bx2 += dbx2; by2 += dby2;
-        if(bx2 < 0 || bx2+bmb2.width > canvas.width)
-        {
-            dbx2 = -dbx2;
-            bx2 += dbx2;
-        }
-        if(by2 < 0 || by2+bmb2.height > canvas.height)
-        {
-            dby2 = -dby2;
-            by2 += dby2;
-        }
+        x += dx;
+        if(x <= 0){x = 0}
+        if(x >= canvas.width-character.width){x = canvas.width-character.width}
+        y += dy;
+        if(y <= 0){y = 0}
+        if(y >= canvas.height-character.height){y = canvas.height-character.height}
         ctx.drawImage(character, x, y);
-        ctx.drawImage(bmb, bx, by);
-        ctx.drawImage(bmb2, bx2, by2);
+        for(var j = 1; j <= i; j++)
+        {
+            bx[j] += dbx[j];
+            if(bx[j] <= 0){bx[j] = 0; dbx[j] *= -1}
+            if(bx[j] >= canvas.width-bmb[j].width){bx[j] = canvas.width-bmb[j].width; dbx[j] *= -1}
+            by[j] += dby[j];
+            if(by[j] <= 0){by[j] = 0; dby[j] *= -1}
+            if(by[j] >= canvas.height-bmb[j].height){by[j] = canvas.height-bmb[j].height; dby[j] *= -1}
+            ctx.drawImage(bmb[j], bx[j], by[j]);
+        }
         ctx.font = "15px Arial";
         ctx.fillText("Score: " + score, 400, 50);
         score += 1;
-        if(((x+character.width >= bx) && (x <= bx+bmb.width) && (y+character.height >= by) && (y <= by+bmb.height)) || (x+character.width >= bx2) && (x <= bx2+bmb2.width) && (y+character.height >= by2) && (y <= by2+bmb2.height))
+        for(var j = 1; j <= i; j++)
         {
-            explode = true;
+            if(x+character.width >= bx[j] && x <= bx[j]+bmb[j].width && y+character.height >= by[j] && y <= by[j]+bmb[j].height)
+            {
+                explode = true;
+                x = 220; y = 400;
+                dx = 0; dy = 0;
+                bmb = [];
+                bx = []; by = [];
+                dbx = []; dby = [];
+                i = 1;
+                bmb[1] = new Image();
+                bmb[1].src = "images/bomb.png";
+                bx[1] = 220; by[1] = 220;
+                dbx[1] = Math.random()*2; if(Math.random() >= 0.5){dbx[1] *= -1}
+                dby[1] = Math.random()*2; if(Math.random() >= 0.5){dby[1] *= -1}
+                break;
+            }
         }
     }
     else
@@ -133,28 +129,6 @@ function draw()
         explode = false;
         x = 220; y = 350;
         dx = 0; dy = 0;
-        bx = 100; by = 100;
-        bx2 = 400; by2 = 100;
-        dbx = Math.random() * 2 + 1;
-        if(Math.random() >= 0.5)
-        {
-            dbx = -dbx;
-        }
-        dby = Math.random() * 2 + 1;
-        if(Math.random() >= 0.5)
-        {
-            dby = -dby;
-        }
-        dbx2 = Math.random() * 2 + 1;
-        if(Math.random() >= 0.5)
-        {
-            dbx2 = -dbx2;
-        }
-        dby2 = Math.random() * 2 + 1;
-        if(Math.random() >= 0.5)
-        {
-            dby2 = -dby2;
-        }
         alert("Game Over!\nScore: " + score);
         score = 0;
     }
