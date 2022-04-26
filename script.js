@@ -28,19 +28,19 @@ function move(e)
 {
     if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 119)
     {
-        dy = -1.5;
+        dy = -2;
     }
     else if(e.keyCode == 37 || e.keyCode == 65 || e.keyCode == 97)
     {
-        dx = -1.5;
+        dx = -2;
     }
     else if(e.keyCode == 40 || e.keyCode == 83 || e.keyCode == 115)
     {
-        dy = 1.5;
+        dy = 2;
     }
     else if(e.keyCode == 39 || e.keyCode == 68 || e.keyCode == 100)
     {
-        dx = 1.5;
+        dx = 2;
     }
 }
 
