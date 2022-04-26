@@ -127,8 +127,6 @@ function draw()
     {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         explode = false;
-        x = 220; y = 350;
-        dx = 0; dy = 0;
         alert("Game Over!\nScore: " + score);
         score = 0;
     }
