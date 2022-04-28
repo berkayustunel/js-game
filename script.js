@@ -28,19 +28,19 @@ function move(e)
 {
     if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 119)
     {
-        dy = -3;
+        dy = -1.5;
     }
     else if(e.keyCode == 37 || e.keyCode == 65 || e.keyCode == 97)
     {
-        dx = -3;
+        dx = -1.5;
     }
     else if(e.keyCode == 40 || e.keyCode == 83 || e.keyCode == 115)
     {
-        dy = 3;
+        dy = 1.5;
     }
     else if(e.keyCode == 39 || e.keyCode == 68 || e.keyCode == 100)
     {
-        dx = 3;
+        dx = 1.5;
     }
 }
 
@@ -77,6 +77,8 @@ function createBomb()
 }
 
 explode = false;
+
+var audio = new Audio("sound/exp.mp3");
 
 function draw()
 {
@@ -127,6 +129,7 @@ function draw()
     {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         explode = false;
+        audio.play();
         alert("Game Over!\nScore: " + score);
         score = 0;
     }
