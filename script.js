@@ -80,6 +80,9 @@ explode = false;
 
 var audio = new Audio("sound/exp.mp3");
 
+var bmb_exp = new Image();
+bmb_exp.src = "images/explode.png";
+
 function draw()
 {
     if(explode == false)
@@ -109,6 +112,7 @@ function draw()
         {
             if(x+character.width >= bx[j] && x <= bx[j]+bmb[j].width && y+character.height >= by[j] && y <= by[j]+bmb[j].height)
             {
+                ctx.drawImage(bmb_exp, bx[j], by[j]);
                 explode = true;
                 x = 220; y = 400;
                 dx = 0; dy = 0;
