@@ -66,22 +66,14 @@ function stop(e)
     }   
 }
 
-function createBomb()
-{
-    i += 1;
-    bmb[i] = new Image();
-    bmb[i].src = "images/bomb.png";
-    bx[i] = Math.random()*canvas.width; by[i] = Math.random()*canvas.height;
-    dbx[i] = Math.random()*2; if(Math.random() >= 0.5){dbx[i] *= -1}
-    dby[i] = Math.random()*2; if(Math.random() >= 0.5){dby[i] *= -1}
-}
-
 explode = false;
 
 var audio = new Audio("sound/exp.mp3");
 
 var bmb_exp = new Image();
 bmb_exp.src = "images/explode.png";
+
+var count = 0;
 
 function draw()
 {
@@ -108,6 +100,17 @@ function draw()
         ctx.font = "15px Arial";
         ctx.fillText("Score: " + score, 400, 50);
         score += 1;
+        count += 1;
+        if(count >= 500)
+        {
+            count = 0;
+            i += 1;
+            bmb[i] = new Image();
+            bmb[i].src = "images/bomb.png";
+            bx[i] = Math.random()*canvas.width; by[i] = Math.random()*canvas.height;
+            dbx[i] = Math.random()*2; if(Math.random() >= 0.5){dbx[i] *= -1}
+            dby[i] = Math.random()*2; if(Math.random() >= 0.5){dby[i] *= -1}
+        }
         for(var j = 1; j <= i; j++)
         {
             if(x+character.width >= bx[j] && x <= bx[j]+bmb[j].width && y+character.height >= by[j] && y <= by[j]+bmb[j].height)
@@ -135,6 +138,7 @@ function draw()
         audio.play();
         alert("Game Over!\nScore: " + score);
         score = 0;
+        count = 0;
     }
     requestAnimationFrame(draw);
 }
