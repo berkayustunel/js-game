@@ -131,10 +131,10 @@ function draw()
     }
     else
     {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
         explode = false;
         audio.play();
         alert("Game Over!\nScore: " + score);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         score = 0;
     }
     requestAnimationFrame(draw);
