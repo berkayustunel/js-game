@@ -4,6 +4,6 @@ HTML canvas, CSS ve JS kullanarak geliştirdiğim ilk oyunum
 Karakter W,A,S,D tuşları veya yön tuşları ile hareket ettirilebilir
 # Oyunun Amacı
 
-![Screenshot_2](https://user-images.githubusercontent.com/94222577/166110541-ac74d3bc-786d-4dfb-b761-af04b3d6cb28.png)
+![Screenshot_1](https://user-images.githubusercontent.com/94222577/167284920-ef4e3e64-9450-47bc-b973-1f0943748765.png)
 
 Zaman geçtikçe artan bombalardan kaçarak en uzun süre hayatta kalmak
